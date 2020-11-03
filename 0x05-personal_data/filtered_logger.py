@@ -67,3 +67,24 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
                                                       password=db_pwrd,
                                                       host=db_host,
                                                       database=db_name)
+
+
+def main() -> None:
+    """ Main Function """
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM users;")
+    len_fields = len(cursor.description)
+    field_values = [i[0] for i in cursor.description]
+    logger = get_logger()
+
+    for row in cursor:
+        message = ''
+        for item in range(len_fields):
+            message += field_values[item] + '=' + str(row[item]) + ';'
+        logger.info(message)
+    cursor.close()
+    db.close()
+
+
+main()
