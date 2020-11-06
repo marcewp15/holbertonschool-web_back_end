@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Manage the API authentication """
 from api.v1.auth.auth import Auth
-import base64
+from base64 import b64decode
 
 
 class BasicAuth(Auth):
@@ -27,8 +27,9 @@ class BasicAuth(Auth):
             return None
         if not isinstance(base64_authorization_header, str):
             return None
+
         try:
-            data_to_decode = base64.b64decode(
+            data_to_decode = b64decode(
                 base64_authorization_header.encode('utf-8'))
             return data_to_decode.decode('utf-8')
         except:
