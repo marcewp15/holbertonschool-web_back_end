@@ -72,10 +72,10 @@ class BasicAuth(Auth):
         try:
             auth_header = self.authorization_header(request)
             auth_base64 = self.extract_base64_authorization_header(header)
-            auth_decode = self.decode_base64_authorization_header(base64Header)
-            auth_user_credentials = self.extract_user_credentials(decodeValue)
-            user = self.user_object_from_credentials(credentials[0],
-                                                     credentials[1])
+            auth_decode = self.decode_base64_authorization_header(auth_base64)
+            auth_user_credentials = self.extract_user_credentials(auth_decode)
+            user = self.user_object_from_credentials(auth_user_credentials[0],
+                                                     auth_user_credentials[1])
             return user
         except Exception:
             return None
