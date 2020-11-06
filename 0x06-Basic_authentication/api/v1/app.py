@@ -51,7 +51,7 @@ def before_request():
                  '/api/v1/forbidden/']
 
     if auth is not None:
-        if auth.require_auth(request.path, path_list):
+        if auth.require_auth(request.path, path_list) is False:
             return
 
         if auth.authorization_header(request) is None:
