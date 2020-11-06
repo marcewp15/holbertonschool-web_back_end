@@ -31,6 +31,6 @@ class BasicAuth(Auth):
         try:
             data_to_decode = b64decode(
                 base64_authorization_header.encode('utf-8'))
-        except:
+        except BaseException:
             return None
         return data_to_decode.decode('utf-8')
