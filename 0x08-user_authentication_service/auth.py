@@ -5,6 +5,7 @@ from db import DB
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.exc import NoResultFound
 from user import User
+import uuid
 
 
 def _hash_password(password: str) -> str:
@@ -30,3 +31,8 @@ class Auth:
             register_user = self._db.add_user(email, hashed_p)
             return register_user
         raise ValueError("User {} already exists.".format(register.email))
+
+
+def _generate_uuid() -> str:
+    """ Generarrte UUIDs """
+    return str(uuid.uuid4())
