@@ -4,6 +4,7 @@ import bcrypt
 from db import DB
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.exc import NoResultFound
+from user import User
 
 
 def _hash_password(password: str) -> str:
@@ -28,4 +29,4 @@ class Auth:
             hashed_p = _hash_password(password)
             register_user = self._db.add_user(email, hashed_p)
             return register_user
-        raise ValueError("User {} already exists.".format(register_user.email))
+        raise ValueError("User {} already exists.".format(register.email))
