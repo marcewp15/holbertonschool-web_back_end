@@ -41,3 +41,14 @@ class DB:
         if find is None:
             raise NoResultFound
         return find
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """ update_user method """
+        update = self.find_user_by(id=user_id)
+        columns = User.__table__.columns._data.keys()
+        for key, value in kwargs.items():
+            if key in columns:
+                setattr(update, key, value)
+            else:
+                raise ValueError
+        self._session.commit()
