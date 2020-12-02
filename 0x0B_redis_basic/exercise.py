@@ -3,7 +3,7 @@
     to use redis as a simple cache"""
 import redis
 import uuid
-from typing import Union, Callable
+from typing import Union, Callable, Optional
 
 
 class Cache:
